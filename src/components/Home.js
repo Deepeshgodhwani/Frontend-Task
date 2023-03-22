@@ -7,7 +7,7 @@ function Home() {
   return (
     <div className="flex">
       <Aside />
-      <AsideDrawer/>
+      <AsideDrawer />
       <BankDetails />
     </div>
   );

@@ -12,12 +12,16 @@ function BankDetails() {
     consent: "off",
   });
 
+  //To update all inpute values in userDetails object
   const updateValue = (e) => {
     setuserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
 
+  //Handling form submit
   const handleForm = (e) => {
     e.preventDefault();
+    // checking if any of input value is empty or not.
+    //if it is then firing alert
     if (
       userDetails.accountHolderName === "" ||
       userDetails.accountNumber === "" ||
@@ -26,28 +30,46 @@ function BankDetails() {
       userDetails.branchName === "" ||
       userDetails.relation === "" ||
       userDetails.consent === "off"
-    )
+    ) {
+      alert("Require all input feilds");
       return;
+    }
 
+    //fetching all input element //
     let inputs = document.getElementsByClassName("input");
+    //fetching consent checkbox, dateElement and  save button
     let consent = document.getElementsByClassName("consent");
     let conentCheckbox = document.querySelector(".consent input");
     let consentDate = document.querySelector(".consent #date");
-    let saveButton=document.getElementById("saveButton");
+    let saveButton = document.getElementById("saveButton");
 
+    //Iterating all input elements and changing thier background and disabling thier input fields
     for (let element of inputs) {
       element.style.backgroundColor = "#E4F0EB";
       element.disabled = true;
     }
+    //hidding consent checkbox and save button  //
     conentCheckbox.style.display = "none";
-    consentDate.style.display = "block";
     consent[0].style.backgroundColor = "#E4F0EB";
-    saveButton.style.display="none"
+    saveButton.style.display = "none";
+
+    //fetching current date
+    let date = new Date();
+    //converting into string //
+    let stringDate = date.toDateString();
+    let finalDate = stringDate.slice(4);
+    //putting current date in dateElement //
+    consentDate.innerHTML = "FILLED ON " + finalDate;
   };
 
   return (
-    <div id="bankDetailForm" className=" lg:w-[77.6%]  xl:w-[75%] pb-10 lg:pb-0 w-full space-y-4 px-6 lg:px-10 py-4 pt-8 lg:pt-14">
-      <h1 className="text-3xl pl-2 font-bold lg:font-semibold">Update Bank Details</h1>
+    <div
+      id="bankDetailForm"
+      className=" lg:w-[77.6%]  xl:w-[75%] pb-10 lg:pb-6 w-full space-y-4 px-6 lg:px-10 py-4 pt-8 lg:pt-14"
+    >
+      <h1 className="text-3xl pl-2 font-bold lg:font-semibold">
+        Update Bank Details
+      </h1>
       <p className="pl-2 pb-4 lg:w-[90%] ">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem
         accusantium doloremque laudantium, totam rem aperiam,eaque ipsa quae ab
@@ -56,7 +78,9 @@ function BankDetails() {
       </p>
       <div className="px-5 lg:px-8 w-[100%] lg:w-[85%] space-y-5 flex  flex-col gap-x-4 lg:space-y-4 py-4 border-[1px] rounded-md border-[#D3D3D3]">
         <div className="flex flex-col lg:flex-row gap-y-3 lg:items-center">
-          <p className="font-bold text-sm  lg:text-base  pl-3 lg:pl-0 lg:w-[50%]">ACCOUNT HOLDER NAME</p>
+          <p className="font-bold text-sm  lg:text-base  pl-3 lg:pl-0 lg:w-[50%]">
+            ACCOUNT HOLDER NAME
+          </p>
           <input
             type={"text"}
             name="accountHolderName"
@@ -67,7 +91,9 @@ function BankDetails() {
           ></input>
         </div>
         <div className="flex flex-col lg:flex-row gap-y-3   lg:items-center">
-          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">ACCOUNT NUMBER</p>
+          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">
+            ACCOUNT NUMBER
+          </p>
           <input
             type={"text"}
             name="accountNumber"
@@ -78,7 +104,9 @@ function BankDetails() {
           ></input>
         </div>{" "}
         <div className="flex flex-col lg:flex-row  gap-y-3  lg:items-center">
-          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">IFSC CODE</p>
+          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">
+            IFSC CODE
+          </p>
           <input
             type={"text"}
             onChange={updateValue}
@@ -89,7 +117,9 @@ function BankDetails() {
           ></input>
         </div>{" "}
         <div className="flex flex-col lg:flex-row  gap-y-3  lg:items-center">
-          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">BANK NAME</p>
+          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">
+            BANK NAME
+          </p>
           <input
             type={"text"}
             onChange={updateValue}
@@ -100,7 +130,9 @@ function BankDetails() {
           ></input>
         </div>{" "}
         <div className="flex flex-col lg:flex-row  gap-y-3  lg:items-center">
-          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">BANK CITY</p>
+          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">
+            BANK CITY
+          </p>
           <input
             type={"text"}
             name="bankCity"
@@ -111,7 +143,9 @@ function BankDetails() {
           ></input>
         </div>{" "}
         <div className="flex flex-col lg:flex-row gap-y-3   lg:items-center">
-          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">BRANCH NAME</p>
+          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">
+            BRANCH NAME
+          </p>
           <input
             type={"text"}
             onChange={updateValue}
@@ -122,7 +156,9 @@ function BankDetails() {
           ></input>
         </div>
         <div className="flex flex-col lg:flex-row gap-y-3  lg:items-center">
-          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">RELATION WITH ACCOUNT HOLDER</p>
+          <p className="font-bold text-sm  lg:text-base pl-3 lg:pl-0 lg:w-[50%]">
+            RELATION WITH ACCOUNT HOLDER
+          </p>
           <input
             type={"text"}
             name="relation"
@@ -133,7 +169,9 @@ function BankDetails() {
           ></input>
         </div>
         <div className="flex flex-col lg:flex-row gap-y-3  ">
-          <p className="font-bold text-sm lg:pt-2   lg:text-base pl-3 lg:pl-0   lg:w-[50%]">CONSENT</p>
+          <p className="font-bold text-sm lg:pt-2   lg:text-base pl-3 lg:pl-0   lg:w-[50%]">
+            CONSENT
+          </p>
 
           <div className=" consent lg:w-[50%] w-full  space-y-3 px-4 py-2 rounded-[4px]  border-[1px] border-[#D3D3D3]  ">
             <div className="flex  gap-x-2">
@@ -150,9 +188,7 @@ function BankDetails() {
                 details, Exambazaar will not be responsible for any loss of pay.
               </p>
             </div>
-            <p id="date" className="font-bold hidden  text-sm">
-              FILLED ON MAR 21, 2023
-            </p>
+            <p id="date" className="font-bold  text-sm"></p>
           </div>
         </div>
         <div className="justify-end flex ">
@@ -165,7 +201,7 @@ function BankDetails() {
           </button>
         </div>
       </div>
-      <p className="border-b-[1px] lg:w-[85%] w-full text-center py-8 border-[#D3D3D3]">
+      <p className="border-b-[1px] lg:w-[85%] w-full text-center py-6 border-[#D3D3D3]">
         THE ABOVE DETAILS ARE FINAL AND WILL BE USED FOR PAYMENT. IF ANY OF
         THESE DETAILS ARE WRONG, PLEASE CONTACT YOUR MANAGER IMMEDIATELY! ALSO
         EMAIL THE SAME TO ACCOUNTS@EXAMBAZAAR.COM!
